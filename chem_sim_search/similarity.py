@@ -1,5 +1,6 @@
 from rdkit import Chem, DataStructs
 from rdkit.Chem import AllChem
+from typing import List
 
 
 def score_similarity(query_smi: str, ref_smi: str, metric=None) -> float:
@@ -14,7 +15,7 @@ def score_similarity(query_smi: str, ref_smi: str, metric=None) -> float:
     return score
 
 
-def sdf_to_smiles(sdf_data):
+def sdf_to_smiles(sdf_data: str) -> List[str]:
     suppl = Chem.SDMolSupplier(sdf_data)
     smiles_list = []
     for mol in suppl:
