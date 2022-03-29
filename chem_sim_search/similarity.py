@@ -2,7 +2,7 @@ from rdkit import Chem, DataStructs
 from rdkit.Chem import AllChem
 
 
-def similarity_score(query_smi: str, ref_smi: str, metric=None) -> float:
+def score_similarity(query_smi: str, ref_smi: str, metric=None) -> float:
     query_mol = Chem.MolFromSmiles(query_smi)
     ref_mol = Chem.MolFromSmiles(ref_smi)
 
@@ -12,3 +12,13 @@ def similarity_score(query_smi: str, ref_smi: str, metric=None) -> float:
     score = DataStructs.DiceSimilarity(query_fp, ref_mol)
 
     return score
+
+
+def sdf_to_smiles(sdf_data):
+    suppl = Chem.SDMolSupplier(sdf_data)
+    smiles_list = []
+    for mol in suppl:
+        smiles = Chem.MolToSmiles(mol)
+        smiles_list.append(smiles)
+
+    return smiles_list
